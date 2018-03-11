@@ -7,7 +7,7 @@
 
 using namespace std;
 
-enum options { encrypt = 1, decrypt, exitprogram };
+enum options { keychoice = 1, encrypt, decrypt, exitprogram };
 
 int main()
 {
@@ -16,11 +16,12 @@ int main()
 
 	while (programRun)
 	{
-		cout << "************Hill-Dixon Tool************\n";
+		cout << "************ Hill-Dixon Tool ************\n";
 		cout << endl;
-		cout << " 1 - Encrypt\n";
-		cout << " 2 - Decrypt\n";
-		cout << " 3 - Exit\n";
+		cout << " 1 - Key Select\n";
+		cout << " 2 - Encrypt\n";
+		cout << " 3 - Decrypt\n";
+		cout << " 4 - Exit\n";
 		cout << endl;
 		cout << " Enter your choice and press return: ";
 
@@ -30,6 +31,27 @@ int main()
 
 		switch (choice)
 		{
+		case keychoice:
+			{
+			const int choice1[][3] = {
+				{6, 1, 1},
+				{4, -2, 5},
+				{2, 8, 7}
+			};
+			
+			const int choice2[][3] = {
+				{6, 24, 1},
+				{13, 16, 10},
+				{20, 17, 15}
+			};
+
+			int output[3][1] = {{0}, {0}, {0}};
+
+			invert(choice1, output);
+
+			break;
+			}
+
 		case encrypt:
 			{
 
