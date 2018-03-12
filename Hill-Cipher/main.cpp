@@ -12,7 +12,8 @@ enum options { keychoice = 1, encrypt, decrypt, exitprogram };
 int main()
 {
 	int choice;
-	bool programRun = true;
+	int chosenKey[3][3];
+	auto programRun = true;
 
 	while (programRun)
 	{
@@ -33,41 +34,57 @@ int main()
 		{
 		case keychoice:
 			{
+			cout << " Please select desired key: ";
+
 			const int choice1[][3] = {
 				{6, 24, 1},
 				{13, 16, 10},
 				{20, 17, 15}
 			};
 
-			auto temp = determinant(choice1);
+			// TODO: Make different key
+			const int choice2[][3] = {
+				{6, 24, 1},
+				{13, 16, 10},
+				{20, 17, 15}
+			};
 
-			std::cout << temp << endl;
+			// TODO: Make different key
+			const int choice3[][3] = {
+				{6, 24, 1},
+				{13, 16, 10},
+				{20, 17, 15}
+			};
 
-			int x, y;
+			int keyChoice;
+			cin >> keyChoice;
 
-			temp = gcdExtended(temp, 26, &x, &y);
-
-			std::cout << temp << endl;
-			std::cout << x + 26 << endl;
-
-			int output[3][1] = {{0}, {0}, {0}};
-			int keyInv[3][3];
-
-				for (int i{}; i < 3; i++)
+			// Copy key to chosenKey
+			for (int i{}; i < 3; i++)
+			{
+				for (int j{}; j < 3; j++)
 				{
-					for (int j{}; j < 3; j++)
-					{
-						keyInv[i][j] = 0;
-					}
+					chosenKey[i][j] = choice1[i][j];
 				}
+			}
 
-			invert(choice1, keyInv);
-
-			break;
+				break;
 			}
 
 		case encrypt:
 			{
+			int output[3][1] = {{0}, {0}, {0}};
+			int keyInv[3][3];
+
+			for (int i{}; i < 3; i++)
+			{
+				for (int j{}; j < 3; j++)
+				{
+					keyInv[i][j] = 0;
+				}
+			}
+
+			invert(chosenKey, keyInv);
 
 			break;
 			}

@@ -13,13 +13,12 @@ void multiply(const int key[3][3], const int plaintext[3][1], int result[3][1])
 	//result[1][0] = key[1][0] * plaintext[0][0] + key[1][1] * plaintext[1][0] + key[1][2] * plaintext[2][0];
 	//result[2][0] = key[2][0] * plaintext[0][0] + key[2][1] * plaintext[1][0] + key[2][2] * plaintext[2][0];
 
-	for (int y{0}; y < 3; y++)
-		for (int x{0}; x < 3; x++)
-		{
-			result[y][x] = 0;
-			for (int i{0}; i < 3; i++)
-				result[y][x] += key[y][i] * plaintext[i][x];
-		}
+	for (int y{ 0 }; y < 3; y++)
+	{
+		result[y][0] = 0;
+		for (int i{ 0 }; i < 3; i++)
+			result[y][0] += key[y][i] * plaintext[i][0];
+	}
 }
 
 int minor(const int key[3][3], const int row, const int column)
@@ -55,20 +54,18 @@ void invert(const int in[][3], int out[][3])
 		for (int x{0}; x < 3; x++)
 		{
 			// Rule is inverse = 1/det * minor of the TRANSPOSE matrix.
-			// Note (y,x) becomes (x,y) INTENTIONALLY here!
 			out[y][x] = minor(in, x, y) * invDet;
 
 			/* (y0,x1)  (y1,x0)  (y1,x2)  and (y2,x1)  all need to be negated. */
 			if (((x + y) % 2) == 1)
 				out[y][x] = -out[y][x];
-		}
-	for (int y{0}; y < 3; y++)
-		for (int x{0}; x < 3; x++)
-		{
+
+			// Forces elements to be between 0 and 26
 			out[y][x] = ((out[y][x] % 26) + 26) % 26;
 		}
 }
 
+// TODO: Clean this up / format nicer
 void print(const int a[][3])
 {
 	for (size_t i = 0; i<3; i++)
@@ -83,7 +80,7 @@ void print(const int a[][3])
 
 int gcdExtended(int a, int b, int *x, int *y)
 {
-	// Base Case
+	// Base Case ( do I really need this?)
 	if (a == 0)
 	{
 		*x = 0;
@@ -91,11 +88,10 @@ int gcdExtended(int a, int b, int *x, int *y)
 		return b;
 	}
 
-	int x1, y1; // To store results of recursive call
-	const auto gcd = gcdExtended(b%a, a, &x1, &y1);
+	int x1, y1; 
+	const auto gcd = gcdExtended(b % a, a, &x1, &y1);
 
-	// Update x and y using results of recursive
-	// call
+	// Update x and y using results of recursive call
 	*x = y1 - (b / a) * x1;
 	*y = x1;
 
