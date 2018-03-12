@@ -45,9 +45,29 @@ int main()
 				{20, 17, 15}
 			};
 
-			int output[3][1] = {{0}, {0}, {0}};
+			auto temp = determinant(choice2);
 
-			invert(choice1, output);
+			std::cout << temp << endl;
+
+			int x, y;
+
+			temp = gcdExtended(temp, 26, &x, &y);
+
+			std::cout << temp << endl;
+			std::cout << x + 26 << endl;
+
+			int output[3][1] = {{0}, {0}, {0}};
+			int keyInv[3][3];
+
+				for (int i{}; i < 3; i++)
+				{
+					for (int j{}; j < 3; j++)
+					{
+						keyInv[i][j] = 0;
+					}
+				}
+
+			invert(choice2, keyInv);
 
 			break;
 			}

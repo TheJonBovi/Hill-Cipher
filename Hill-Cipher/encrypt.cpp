@@ -1,5 +1,6 @@
 // encrypt.cpp : Routines for encryption and decryption
 // some code snippets from Mr Rhea at https://stackoverflow.com/questions/983999/simple-3x3-matrix-inverse-code-c
+// algorithm for extended euclidain gcd from https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
 
 #include "stdafx.h"
 #include "encrypt.h"
@@ -42,11 +43,13 @@ int determinant(const int key[3][3])
 	return ret;
 }
 
-void invert(const int in[][3], int out[][1])
+void invert(const int in[][3], int out[][3])
 {
 	const auto det = determinant(in);
 
-	const auto invDet = 1 / det;
+	int modInverse, tempY;
+	gcdExtended(det, 26, &modInverse, &tempY);
+	const auto invDet = (modInverse + 26) % 26;
 
 	for (int y{0}; y < 3; y++)
 		for (int x{0}; x < 3; x++)
@@ -58,6 +61,11 @@ void invert(const int in[][3], int out[][1])
 			/* (y0,x1)  (y1,x0)  (y1,x2)  and (y2,x1)  all need to be negated. */
 			if (((x + y) % 2) == 1)
 				out[y][x] = -out[y][x];
+		}
+	for (int y{0}; y < 3; y++)
+		for (int x{0}; x < 3; x++)
+		{
+			out[y][x] = ((out[y][x] % 26) + 26) % 26;
 		}
 }
 
@@ -71,4 +79,25 @@ void print(const int a[][3])
 		}
 		std::cout << std::endl;
 	}
+}
+
+int gcdExtended(int a, int b, int *x, int *y)
+{
+	// Base Case
+	if (a == 0)
+	{
+		*x = 0;
+		*y = 1;
+		return b;
+	}
+
+	int x1, y1; // To store results of recursive call
+	const auto gcd = gcdExtended(b%a, a, &x1, &y1);
+
+	// Update x and y using results of recursive
+	// call
+	*x = y1 - (b / a) * x1;
+	*y = x1;
+
+	return gcd;
 }
