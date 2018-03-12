@@ -10,6 +10,6 @@ int minor(const int key[3][3], const int row, const int column);
 
 int determinant(const int key[3][3]);
 
-void invert(const int in[3][3], int out[3][1]);
+void invert(const int in[][3], int out[][1]);
 
 void print(const int a[][3]);
