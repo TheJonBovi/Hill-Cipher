@@ -34,18 +34,12 @@ int main()
 		case keychoice:
 			{
 			const int choice1[][3] = {
-				{6, 1, 1},
-				{4, -2, 5},
-				{2, 8, 7}
-			};
-			
-			const int choice2[][3] = {
 				{6, 24, 1},
 				{13, 16, 10},
 				{20, 17, 15}
 			};
 
-			auto temp = determinant(choice2);
+			auto temp = determinant(choice1);
 
 			std::cout << temp << endl;
 
@@ -67,7 +61,7 @@ int main()
 					}
 				}
 
-			invert(choice2, keyInv);
+			invert(choice1, keyInv);
 
 			break;
 			}
