@@ -7,16 +7,97 @@
 #include <ostream>
 #include <iostream>
 
+using namespace std;
+
+void selectKey(int key[3][3])
+{
+			const int choice1[][3] = {
+				{6, 24, 1},
+				{13, 16, 10},
+				{20, 17, 15}
+			};
+
+			const int choice2[][3] = {
+				{3, 10, 20},
+				{20, 9, 17},
+				{9, 4, 17}
+			};
+
+			const int choice3[][3] = {
+				{2, 4, 5},
+				{9, 2, 1},
+				{3, 17, 7}
+			};
+
+			cout << "     Key 1" << endl;
+			printMatrix(choice1);
+			cout << endl;
+			cout << "     Key 2" << endl;
+			printMatrix(choice2);
+			cout << endl;
+			cout << "     Key 3" << endl;
+			printMatrix(choice3);
+			cout << endl;
+
+			cout << " Please select desired key: ";
+			int keyChoice;
+			cin >> keyChoice;
+			cout << endl;
+
+			switch (keyChoice)
+			{
+			case 1:
+
+				// Copy key to chosenKey
+				for (int i{}; i < 3; i++)
+				{
+					for (int j{}; j < 3; j++)
+					{
+						key[i][j] = choice1[i][j];
+					}
+				}
+
+				break;
+
+			case 2:
+
+				// Copy key to chosenKey
+				for (int i{}; i < 3; i++)
+				{
+					for (int j{}; j < 3; j++)
+					{
+						key[i][j] = choice2[i][j];
+					}
+				}
+
+				break;
+
+			case 3:
+			default:
+
+				// Copy key to chosenKey
+				for (int i{}; i < 3; i++)
+				{
+					for (int j{}; j < 3; j++)
+					{
+						key[i][j] = choice3[i][j];
+					}
+				}
+
+				break;
+			}
+
+			system("CLS");
+			cout << flush;
+	
+}
+
 void multiply(const int key[3][3], const int plaintext[3][1], int result[3][1]) 
 {
-	//result[0][0] = key[0][0] * plaintext[0][0] + key[0][1] * plaintext[1][0] + key[0][2] * plaintext[2][0];
-	//result[1][0] = key[1][0] * plaintext[0][0] + key[1][1] * plaintext[1][0] + key[1][2] * plaintext[2][0];
-	//result[2][0] = key[2][0] * plaintext[0][0] + key[2][1] * plaintext[1][0] + key[2][2] * plaintext[2][0];
-
-	for (int y{ 0 }; y < 3; y++)
+	for (int y{}; y < 3; y++)
 	{
 		result[y][0] = 0;
-		for (int i{ 0 }; i < 3; i++)
+		for (int i{}; i < 3; i++)
 			result[y][0] += key[y][i] * plaintext[i][0];
 	}
 }
@@ -50,8 +131,8 @@ void invert(const int in[][3], int out[][3])
 	gcdExtended(det, 26, &modInverse, &tempY);
 	const auto invDet = (modInverse + 26) % 26;
 
-	for (int y{0}; y < 3; y++)
-		for (int x{0}; x < 3; x++)
+	for (int y{}; y < 3; y++)
+		for (int x{}; x < 3; x++)
 		{
 			// Rule is inverse = 1/det * minor of the TRANSPOSE matrix.
 			out[y][x] = minor(in, x, y) * invDet;
@@ -65,29 +146,10 @@ void invert(const int in[][3], int out[][3])
 		}
 }
 
-// TODO: Clean this up / format nicer
-void printMatrix(const int a[][3])
+// TODO: Get rid of references to y (not needed)
+// TODO: Make void?
+int gcdExtended(const int a, const int b, int *x, int *y)
 {
-	for (size_t i = 0; i<3; i++)
-	{
-		for (size_t j = 0; j<3; j++)
-		{
-			std::cout << a[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-}
-
-int gcdExtended(int a, int b, int *x, int *y)
-{
-	// Base Case ( do I really need this?)
-	if (a == 0)
-	{
-		*x = 0;
-		*y = 1;
-		return b;
-	}
-
 	int x1, y1; 
 	const auto gcd = gcdExtended(b % a, a, &x1, &y1);
 
@@ -103,7 +165,7 @@ void getInput(int text[3][1], const textType format)
 	for (int i{}; i < 3; i++)
 	{
 		char rawInput;
-		std::cin >> rawInput;
+		cin >> rawInput;
 
 		int currentChar;
 		if (format == plain) currentChar = rawInput - 97;
@@ -114,14 +176,30 @@ void getInput(int text[3][1], const textType format)
 	}
 }
 
+void printMatrix(const int matrix[][3])
+{
+	for (size_t i = 0; i<3; i++)
+	{
+		cout << " [ ";
+		for (size_t j = 0; j < 3; j++)
+		{
+			if(matrix[i][j] < 10)
+			cout << matrix[i][j] << "  ";
+			else
+			cout << matrix[i][j] << " ";
+		}
+		cout << "] ";
+		cout << std::endl;
+	}
+}
+
 void printText(const int text[3][1], const textType format)
 {
 	for (int i{}; i < 3; i++)
 	{
 		if (format == plain)
-			std::cout << char((text[i][0] % 26) + 97);
+			cout << char((text[i][0] % 26) + 97);
 		else
-			std::cout << char((text[i][0] % 26) + 65);
-
+			cout << char((text[i][0] % 26) + 65);
 	}
 }

@@ -14,6 +14,7 @@ int main()
 	int choice;
 	int chosenKey[3][3];
 	auto programRun = true;
+	auto keySelectedFlag = false;
 
 	while (programRun)
 	{
@@ -27,120 +28,65 @@ int main()
 		cout << " Enter your choice and press return: ";
 
 		cin >> choice;
-
 		cout << endl;
 
 		switch (choice)
 		{
 
 		case keychoice:
-
-			cout << " Please select desired key: ";
-			int keyChoice;
-			cin >> keyChoice;
-			cout << endl;
-
-			switch (keyChoice)
-			{
-				case 1:
-				{
-
-					const int choice1[][3] = {
-						{6, 24, 1},
-						{13, 16, 10},
-						{20, 17, 15}
-					};
-
-					// Copy key to chosenKey
-					for (int i{}; i < 3; i++)
-					{
-						for (int j{}; j < 3; j++)
-						{
-							chosenKey[i][j] = choice1[i][j];
-						}
-					}
-
-					break;
-				}
-
-			case 2:
-				{
-					// TODO: Make different key
-					const int choice2[][3] = {
-						{6, 24, 1},
-						{13, 16, 10},
-						{20, 17, 15}
-					};
-
-					// Copy key to chosenKey
-					for (int i{}; i < 3; i++)
-					{
-						for (int j{}; j < 3; j++)
-						{
-							chosenKey[i][j] = choice2[i][j];
-						}
-					}
-
-					break;
-				}
-
-			case 3:
-			default:
-				{
-					// TODO: Make different key
-					const int choice3[][3] = {
-						{6, 24, 1},
-						{13, 16, 10},
-						{20, 17, 15}
-					};
-
-					// Copy key to chosenKey
-					for (int i{}; i < 3; i++)
-					{
-						for (int j{}; j < 3; j++)
-						{
-							chosenKey[i][j] = choice3[i][j];
-						}
-					}
-
-					break;
-				}
-			}
-
-			system("CLS");
-			cout << flush;
+		{
+			selectKey(chosenKey);
+			keySelectedFlag = true;
 			break;
+		}
 
 		case encrypt:
+		{
+			if (keySelectedFlag)
 			{
-			// TODO: Add check to see if key is selected
-			cout << " Please enter 3-digit plaintext: ";
+				cout << " Please enter 3-digit plaintext: ";
 
-			int input[3][1];
-			getInput(input, plain);
-			cout << endl;
+				int input[3][1];
+				getInput(input, plain);
+				cout << endl;
 
-			int output[3][1];
-			int keyInv[3][3];
+				int output[3][1];
+				int keyInv[3][3];
 
-			invert(chosenKey, keyInv);
+				invert(chosenKey, keyInv);
 
-			multiply(chosenKey, input, output);
+				multiply(chosenKey, input, output);
 
-			cout << " The ciphertext is: ";
-			printText(output, cipher);
-			cout << endl;
-			cout << endl;
+				cout << " The ciphertext is: ";
+				printText(output, cipher);
+				cout << endl;
+				cout << endl;
+
+			}
+			else
+			{
+				cout << " Please select a key first!";
+				cout << endl << endl;
+			}
 
 			system("pause");
 			system("CLS");
 
 			break;
-			}
+		}
 
 		case decrypt:
+		{
+			if (keySelectedFlag)
 			{
-			// TODO: Add check to see if key is selected
+				
+			}
+			else
+			{
+				cout << " Please select a key first!";
+				cout << endl << endl;
+				
+			}
 
 			break;
 			}
