@@ -75,11 +75,28 @@ int main()
 			break;
 		}
 
+		// TODO: This isn't working right
 		case decrypt:
 		{
 			if (keySelectedFlag)
 			{
-				
+				cout << " Please enter 3-digit ciphertext: ";
+
+				int input[3][1];
+				getInput(input, cipher);
+				cout << endl;
+
+				int output[3][1];
+				int keyInv[3][3];
+
+				invert(chosenKey, keyInv);
+
+				multiply(chosenKey, input, output);
+
+				cout << " The plaintext is: ";
+				printText(output, plain);
+				cout << endl;
+				cout << endl;
 			}
 			else
 			{

@@ -150,7 +150,15 @@ void invert(const int in[][3], int out[][3])
 // TODO: Make void?
 int gcdExtended(const int a, const int b, int *x, int *y)
 {
-	int x1, y1; 
+	//Base case
+	if (a == 0)
+	{
+		*x = 0;
+		*y = 1;
+		return b;
+	}	
+
+	int x1, y1;
 	const auto gcd = gcdExtended(b % a, a, &x1, &y1);
 
 	// Update x and y using results of recursive call
