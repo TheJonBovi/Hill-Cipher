@@ -98,21 +98,30 @@ int gcdExtended(int a, int b, int *x, int *y)
 	return gcd;
 }
 
-void getInput(int text[3][1])
+void getInput(int text[3][1], const textType format)
 {
 	for (int i{}; i < 3; i++)
 	{
 		char rawInput;
 		std::cin >> rawInput;
-		auto const currentChar = rawInput - 97;
+
+		int currentChar;
+		if (format == plain) currentChar = rawInput - 97;
+		
+		else currentChar = rawInput - 65; 
+
 		text[i][0] = currentChar;
 	}
 }
 
-void printText(const int text[3][1])
+void printText(const int text[3][1], const textType format)
 {
 	for (int i{}; i < 3; i++)
 	{
-		std::cout << char((text[i][0] % 26) + 97);
+		if (format == plain)
+			std::cout << char((text[i][0] % 26) + 97);
+		else
+			std::cout << char((text[i][0] % 26) + 65);
+
 	}
 }

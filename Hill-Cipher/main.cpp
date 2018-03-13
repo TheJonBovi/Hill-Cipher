@@ -113,10 +113,11 @@ int main()
 
 		case encrypt:
 			{
+			// TODO: Add check to see if key is selected
 			cout << " Please enter 3-digit plaintext: ";
 
 			int input[3][1];
-			getInput(input);
+			getInput(input, plain);
 			cout << endl;
 
 			int output[3][1];
@@ -127,7 +128,7 @@ int main()
 			multiply(chosenKey, input, output);
 
 			cout << " The ciphertext is: ";
-			printText(output);
+			printText(output, cipher);
 			cout << endl;
 			cout << endl;
 
@@ -139,6 +140,7 @@ int main()
 
 		case decrypt:
 			{
+			// TODO: Add check to see if key is selected
 
 			break;
 			}
