@@ -32,59 +32,107 @@ int main()
 
 		switch (choice)
 		{
+
 		case keychoice:
-			{
+
 			cout << " Please select desired key: ";
-
-			const int choice1[][3] = {
-				{6, 24, 1},
-				{13, 16, 10},
-				{20, 17, 15}
-			};
-
-			// TODO: Make different key
-			const int choice2[][3] = {
-				{6, 24, 1},
-				{13, 16, 10},
-				{20, 17, 15}
-			};
-
-			// TODO: Make different key
-			const int choice3[][3] = {
-				{6, 24, 1},
-				{13, 16, 10},
-				{20, 17, 15}
-			};
-
 			int keyChoice;
 			cin >> keyChoice;
+			cout << endl;
 
-			// Copy key to chosenKey
-			for (int i{}; i < 3; i++)
+			switch (keyChoice)
 			{
-				for (int j{}; j < 3; j++)
+				case 1:
 				{
-					chosenKey[i][j] = choice1[i][j];
+
+					const int choice1[][3] = {
+						{6, 24, 1},
+						{13, 16, 10},
+						{20, 17, 15}
+					};
+
+					// Copy key to chosenKey
+					for (int i{}; i < 3; i++)
+					{
+						for (int j{}; j < 3; j++)
+						{
+							chosenKey[i][j] = choice1[i][j];
+						}
+					}
+
+					break;
+				}
+
+			case 2:
+				{
+					// TODO: Make different key
+					const int choice2[][3] = {
+						{6, 24, 1},
+						{13, 16, 10},
+						{20, 17, 15}
+					};
+
+					// Copy key to chosenKey
+					for (int i{}; i < 3; i++)
+					{
+						for (int j{}; j < 3; j++)
+						{
+							chosenKey[i][j] = choice2[i][j];
+						}
+					}
+
+					break;
+				}
+
+			case 3:
+			default:
+				{
+					// TODO: Make different key
+					const int choice3[][3] = {
+						{6, 24, 1},
+						{13, 16, 10},
+						{20, 17, 15}
+					};
+
+					// Copy key to chosenKey
+					for (int i{}; i < 3; i++)
+					{
+						for (int j{}; j < 3; j++)
+						{
+							chosenKey[i][j] = choice3[i][j];
+						}
+					}
+
+					break;
 				}
 			}
 
-				break;
-			}
+			system("CLS");
+			cout << flush;
+			break;
 
 		case encrypt:
 			{
-			int output[3][1] = {{0}, {0}, {0}};
+			cout << " Please enter 3-digit plaintext: ";
+
+			int input[3][1];
+			getInput(input);
+			cout << endl;
+
+			int output[3][1];
 			int keyInv[3][3];
 
-			for (int i{}; i < 3; i++)
-			{
-				for (int j{}; j < 3; j++)
-				{
-					keyInv[i][j] = 0;
-				}
-			}
-
 			invert(chosenKey, keyInv);
+
+			multiply(chosenKey, input, output);
+
+			cout << " The ciphertext is: ";
+			printText(output);
+			cout << endl;
+			cout << endl;
+
+			system("pause");
+			system("CLS");
 
 			break;
 			}

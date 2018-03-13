@@ -66,7 +66,7 @@ void invert(const int in[][3], int out[][3])
 }
 
 // TODO: Clean this up / format nicer
-void print(const int a[][3])
+void printMatrix(const int a[][3])
 {
 	for (size_t i = 0; i<3; i++)
 	{
@@ -96,4 +96,23 @@ int gcdExtended(int a, int b, int *x, int *y)
 	*y = x1;
 
 	return gcd;
+}
+
+void getInput(int text[3][1])
+{
+	for (int i{}; i < 3; i++)
+	{
+		char rawInput;
+		std::cin >> rawInput;
+		auto const currentChar = rawInput - 97;
+		text[i][0] = currentChar;
+	}
+}
+
+void printText(const int text[3][1])
+{
+	for (int i{}; i < 3; i++)
+	{
+		std::cout << char((text[i][0] % 26) + 97);
+	}
 }
