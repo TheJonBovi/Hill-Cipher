@@ -34,11 +34,9 @@ int main()
 		{
 
 		case keychoice:
-		{
 			selectKey(chosenKey);
 			keySelectedFlag = true;
 			break;
-		}
 
 		case encrypt:
 		{
@@ -47,21 +45,17 @@ int main()
 				cout << " Please enter 3-digit plaintext: ";
 
 				int input[3][1];
+				// TODO: Check input is character / lowercase
 				getInput(input, plain);
 				cout << endl;
 
 				int output[3][1];
-				int keyInv[3][3];
-
-				invert(chosenKey, keyInv);
-
 				multiply(chosenKey, input, output);
 
 				cout << " The ciphertext is: ";
 				printText(output, cipher);
 				cout << endl;
 				cout << endl;
-
 			}
 			else
 			{
@@ -71,11 +65,9 @@ int main()
 
 			system("pause");
 			system("CLS");
-
 			break;
 		}
 
-		// TODO: This isn't working right
 		case decrypt:
 		{
 			if (keySelectedFlag)
@@ -83,15 +75,14 @@ int main()
 				cout << " Please enter 3-digit ciphertext: ";
 
 				int input[3][1];
+				// TODO: Check input is character / uppercase
 				getInput(input, cipher);
 				cout << endl;
 
 				int output[3][1];
 				int keyInv[3][3];
-
 				invert(chosenKey, keyInv);
-
-				multiply(chosenKey, input, output);
+				multiply(keyInv, input, output);
 
 				cout << " The plaintext is: ";
 				printText(output, plain);
@@ -102,9 +93,7 @@ int main()
 			{
 				cout << " Please select a key first!";
 				cout << endl << endl;
-				
 			}
-
 			break;
 			}
 
