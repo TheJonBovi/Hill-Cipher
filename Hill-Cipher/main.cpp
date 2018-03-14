@@ -94,6 +94,9 @@ int main()
 				cout << " Please select a key first!";
 				cout << endl << endl;
 			}
+
+			system("pause");
+			system("CLS");
 			break;
 			}
 
